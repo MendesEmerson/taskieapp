@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "65294873555",
+    "project_id": "taskieapp-16199",
+    "storage_bucket": "taskieapp-16199.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65294873555:android:343373367825f14cf8f526",
+        "android_client_info": {
+          "package_name": "com.dartvaders.taskieapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9Ga6WdCD72tzgSgo5V1sQADhfUH_Z-X4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
