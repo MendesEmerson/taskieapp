@@ -38,6 +38,7 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
                   fontSize: 28,
                 ),
               ),
+              const SizedBox(width: 2),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +68,7 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
             style: const TextStyle(
               color: CustomColors.titleTextColor,
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: 16,
             ),
           ),
         ],

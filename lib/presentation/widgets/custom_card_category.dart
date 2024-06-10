@@ -4,8 +4,11 @@ import 'package:taskieapp/presentation/widgets/custom_text.dart';
 
 class CustomCardCategoryWidget extends StatelessWidget {
   final String categoryName;
+  final int quantidadeTarefas;
+  final int quantidadeTarefasDone;
 
-  const CustomCardCategoryWidget({super.key, required this.categoryName});
+  const CustomCardCategoryWidget(
+      {super.key, required this.categoryName, required this.quantidadeTarefas, required this.quantidadeTarefasDone});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +17,10 @@ class CustomCardCategoryWidget extends StatelessWidget {
     return Card(
       color: CustomColors.padraoWidgetTransparente,
       child: Container(
-        margin: const EdgeInsets.only(left: 16, right: 16, top: 4, bottom: 4),
+        width: MediaQuery.of(context).size.width * 0.35,
+        margin: const EdgeInsets.only(left: 12, right: 12),
         child: Column(
-          children: [
+          crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -26,6 +30,7 @@ class CustomCardCategoryWidget extends StatelessWidget {
                       padrao.icon,
                       color: padrao.corPadraoCategoria,
                     ),
+                    const SizedBox(width: 5),
                     CustomTextWidget(
                       text: categoryName,
                       textColor: padrao.corPadraoCategoria,
@@ -33,14 +38,27 @@ class CustomCardCategoryWidget extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                  alignment: Alignment.centerRight,
                   onPressed: () {},
                   icon: const Icon(
+                    size: 20,
                     Icons.edit,
                     color: CustomColors.titleTextColor,
                   ),
                 ),
               ],
+            ),
+            CustomTextWidget(
+              text: "$quantidadeTarefas tarefas",
+              textColor: CustomColors.titleTextColor,
+            ),
+            const SizedBox(height: 4),
+            LinearProgressIndicator(
+              value: quantidadeTarefasDone / quantidadeTarefas,
+              valueColor:
+                  AlwaysStoppedAnimation<Color>(padrao.corPadraoCategoria),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
+              minHeight: 12,
+              backgroundColor: CustomColors.textColor,
             )
           ],
         ),
@@ -51,10 +69,10 @@ class CustomCardCategoryWidget extends StatelessWidget {
 
 PadraoCategoria _criarPadraoCategoria(String nomeCategoria) {
   final IconData? icon;
-  final Color? corPadraoCategoria;
+  final Color corPadraoCategoria;
 
   switch (nomeCategoria.toUpperCase()) {
-    case "FAMILIA":
+    case "FAMÍLIA":
       icon = Icons.family_restroom;
       corPadraoCategoria = Colors.red;
       break;
@@ -64,7 +82,7 @@ PadraoCategoria _criarPadraoCategoria(String nomeCategoria) {
       break;
     default:
       icon = null;
-      corPadraoCategoria = null;
+      corPadraoCategoria = CustomColors.textColor;
   }
 
   return PadraoCategoria(icon: icon, corPadraoCategoria: corPadraoCategoria);
@@ -72,7 +90,7 @@ PadraoCategoria _criarPadraoCategoria(String nomeCategoria) {
 
 class PadraoCategoria {
   final IconData? icon;
-  final Color? corPadraoCategoria;
+  final Color corPadraoCategoria;
 
   PadraoCategoria({required this.icon, required this.corPadraoCategoria});
 }

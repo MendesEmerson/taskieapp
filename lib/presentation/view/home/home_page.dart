@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:taskieapp/presentation/widgets/custom_appbar.dart';
 import 'package:taskieapp/presentation/widgets/custom_card_category.dart';
-import 'package:taskieapp/presentation/widgets/custom_text.dart';
+import 'package:taskieapp/presentation/widgets/custom_progress_task_bar.dart';
 
-import '../../widgets/custom_progress_task_bar.dart';
+import '../../widgets/custom_botton_nav.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final List<Map<String, dynamic>> categories = [
+    {"name": "Saúde", "tasks": 14, "tasksDone": 3},
+    {"name": "Família", "tasks": 8, "tasksDone": 2},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +22,10 @@ class HomePage extends StatelessWidget {
       ),
       endDrawer: const Drawer(
         shadowColor: Colors.transparent,
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: 1,
+        onTabTapped: (int) {},
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
@@ -32,11 +41,32 @@ class HomePage extends StatelessWidget {
             stops: [0.0, 0.77, 1.0],
           ),
         ),
-        child: const Column(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 25),
-            CustomProgressTaskBarWidget(totalTasks: 11, taskDone: 7,),
-            CustomCardCategoryWidget(categoryName: "Saúde",)
+            const SizedBox(height: 25),
+            const CustomProgressTaskBarWidget(totalTasks: 11, taskDone: 7),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisExtent: 120,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                ),
+                itemCount: categories.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CustomCardCategoryWidget(
+                    categoryName: categories[index]["name"],
+                    quantidadeTarefas: categories[index]["tasks"],
+                    quantidadeTarefasDone: categories[index]["tasksDone"],
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
