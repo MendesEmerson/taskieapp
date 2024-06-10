@@ -61,7 +61,7 @@ class WelcomePage extends StatelessWidget {
                     height: 30,
                   ),
                   Text(
-                    StringsConstants.textHomePage,
+                    StringsConstants.textoHomePage,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,

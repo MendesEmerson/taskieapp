@@ -4,9 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:taskieapp/presentation/routes/nav_routes.dart';
 import 'package:taskieapp/presentation/view/cadastro/bloc/cadastro_bloc.dart';
 import 'package:taskieapp/presentation/widgets/custom_button.dart';
+import 'package:taskieapp/presentation/widgets/custom_text.dart';
 import 'package:taskieapp/presentation/widgets/custom_text_input_password.dart';
 import '../../../domain/repositories/firebase_auth_repository.dart';
 import '../../comuns/constants/images.dart';
+import '../../comuns/constants/strings.dart';
 import '../../comuns/styles/custom_colors.dart';
 import '../../widgets/custom_text_input.dart';
 
@@ -18,7 +20,7 @@ class CadastroPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
   final TextEditingController _confirmarSenhaController =
-  TextEditingController();
+      TextEditingController();
 
   void _cadastrar(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
@@ -27,16 +29,12 @@ class CadastroPage extends StatelessWidget {
       final senha = _senhaController.text;
 
       context.read<CadastroBloc>().add(
-        CadastrarUsuarioEvent(
-          nome: nome,
-          email: email,
-          senha: senha,
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Preencha corretamente todos os campos")),
-      );
+            CadastrarUsuarioEvent(
+              nome: nome,
+              email: email,
+              senha: senha,
+            ),
+          );
     }
   }
 
@@ -102,12 +100,10 @@ class CadastroPage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Comece gratuitamente",
-                            style: TextStyle(
-                                color: CustomColors.titleTextColor,
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold),
+                          const CustomTextWidget(
+                            text: StringsConstants.comeceGratuitamente,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
                           ),
                           const SizedBox(height: 30),
                           Form(
@@ -117,13 +113,13 @@ class CadastroPage extends StatelessWidget {
                                 CustomTextInputWidget(
                                   controller: _nomeController,
                                   width:
-                                  MediaQuery.of(context).size.width * 0.8,
+                                      MediaQuery.of(context).size.width * 0.8,
                                   prefixIcon: Icons.person,
-                                  inputName: "Nome",
-                                  hint: "Digite seu nome",
+                                  inputName: StringsConstants.nome,
+                                  hint: StringsConstants.nomePlaceholder,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'O nome é obrigatório.';
+                                      return StringsConstants.nomeInvalido;
                                     }
                                     return null;
                                   },
@@ -132,13 +128,15 @@ class CadastroPage extends StatelessWidget {
                                 CustomTextInputWidget(
                                   controller: _emailController,
                                   width:
-                                  MediaQuery.of(context).size.width * 0.8,
+                                      MediaQuery.of(context).size.width * 0.8,
                                   prefixIcon: Icons.person,
-                                  inputName: "Email",
-                                  hint: "seuemail@taskie.com",
+                                  inputName: StringsConstants.email,
+                                  hint: StringsConstants.emailPlaceholder,
                                   validator: (value) {
-                                    if (value == null || value.isEmpty || !value.contains('@')) {
-                                      return 'Insira um email válido';
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        !value.contains('@')) {
+                                      return StringsConstants.emailInvalido;
                                     }
                                     return null;
                                   },
@@ -147,19 +145,18 @@ class CadastroPage extends StatelessWidget {
                                 CustomTextInputPasswordWidget(
                                   controller: _senhaController,
                                   width:
-                                  MediaQuery.of(context).size.width * 0.8,
+                                      MediaQuery.of(context).size.width * 0.8,
                                   prefixIcon: Icons.lock,
-                                  inputName: "Senha",
-                                  hint:
-                                  "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                                  inputName: StringsConstants.senha,
+                                  hint: StringsConstants.senhaPlaceholder,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'A senha é obrigatória.';
+                                      return StringsConstants.senhaInvalido;
                                     }
                                     if (!RegExp(
-                                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}|:"<>?~`]).{8,}$')
+                                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}|:"<>?~`]).{8,}$')
                                         .hasMatch(value)) {
-                                      return 'A senha deve conter pelo menos 8 caracteres, incluindo pelo menos uma letra maiúscula, um número e um caractere especial.';
+                                      return StringsConstants.senhaRegra;
                                     }
                                     return null;
                                   },
@@ -168,17 +165,17 @@ class CadastroPage extends StatelessWidget {
                                 CustomTextInputPasswordWidget(
                                   controller: _confirmarSenhaController,
                                   width:
-                                  MediaQuery.of(context).size.width * 0.8,
+                                      MediaQuery.of(context).size.width * 0.8,
                                   prefixIcon: Icons.lock,
-                                  inputName: "Confirmar senha",
-                                  hint:
-                                  "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                                  inputName: StringsConstants.senhaConfirma,
+                                  hint: StringsConstants.senhaPlaceholder,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'A confirmação de senha é obrigatória.';
+                                      return StringsConstants.senhaInvalido;
                                     }
                                     if (value != _senhaController.text) {
-                                      return 'As senhas não coincidem.';
+                                      return StringsConstants
+                                          .senhaConfirmaInvalido;
                                     }
                                     return null;
                                   },
@@ -186,9 +183,9 @@ class CadastroPage extends StatelessWidget {
                                 const SizedBox(height: 30.0),
                                 CustomButtonWidget(
                                   width:
-                                  MediaQuery.of(context).size.width * 0.8,
+                                      MediaQuery.of(context).size.width * 0.8,
                                   onClick: () => _cadastrar(context),
-                                  text: "Cadastrar",
+                                  text: StringsConstants.cadastro,
                                 ),
                               ],
                             ),

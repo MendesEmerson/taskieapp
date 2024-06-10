@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taskieapp/presentation/comuns/constants/images.dart';
+import 'package:taskieapp/presentation/comuns/constants/strings.dart';
 import 'package:taskieapp/presentation/comuns/styles/custom_colors.dart';
 import 'package:taskieapp/presentation/routes/nav_routes.dart';
 import 'package:taskieapp/presentation/widgets/custom_button.dart';
@@ -30,10 +31,6 @@ class LoginPage extends StatelessWidget {
           email: email,
           senha: senha,
         ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Preencha corretamente os campos Email e Senha")),
       );
     }
   }
@@ -106,7 +103,7 @@ class LoginPage extends StatelessWidget {
                             children: [
                               const SizedBox(height: 30),
                               const Text(
-                                "Bem vindo novamente",
+                                StringsConstants.bemVindo,
                                 style: TextStyle(
                                   color: CustomColors.titleTextColor,
                                   fontSize: 28,
@@ -114,7 +111,7 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               const Text(
-                                "nós sentimos sua falta!",
+                                StringsConstants.sentimosSuaFalta,
                                 style: TextStyle(
                                   color: CustomColors.textColor,
                                   fontSize: 16,
@@ -125,11 +122,11 @@ class LoginPage extends StatelessWidget {
                                 controller: _emailController,
                                 width: MediaQuery.of(context).size.width * 0.8,
                                 prefixIcon: Icons.person,
-                                inputName: "Email",
-                                hint: "seuemail@taskie.com",
+                                inputName: StringsConstants.email,
+                                hint: StringsConstants.emailPlaceholder,
                                 validator: (value) {
                                   if (value == null || value.isEmpty || !value.contains('@')) {
-                                    return 'Insira um email válido';
+                                    return StringsConstants.emailInvalido;
                                   }
                                   return null;
                                 },
@@ -139,11 +136,11 @@ class LoginPage extends StatelessWidget {
                                 controller: _senhaController,
                                 width: MediaQuery.of(context).size.width * 0.8,
                                 prefixIcon: Icons.lock,
-                                inputName: "Senha",
-                                hint: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                                inputName: StringsConstants.senha,
+                                hint: StringsConstants.senhaPlaceholder,
                                 validator: (value) {
                                   if (value == null || value.length < 6) {
-                                    return 'A senha deve ser preenchida';
+                                    return StringsConstants.senhaInvalido;
                                   }
                                   return null;
                                 },
@@ -154,7 +151,7 @@ class LoginPage extends StatelessWidget {
                               SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.8,
                                 child: const Text(
-                                  "Esqueceu a senha?",
+                                  StringsConstants.esqueceuSenha,
                                   textAlign: TextAlign.end,
                                   style: TextStyle(color: Colors.white60),
                                 ),
@@ -163,7 +160,7 @@ class LoginPage extends StatelessWidget {
                               CustomButtonWidget(
                                 width: MediaQuery.of(context).size.width * 0.8,
                                 onClick: () => _login(context),
-                                text: "Login",
+                                text: StringsConstants.login,
                               ),
                             ],
                           ),
