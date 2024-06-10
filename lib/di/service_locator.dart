@@ -9,7 +9,7 @@ final GetIt getIt = GetIt.instance;
 void setup() {
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
-  getIt.registerLazySingleton<FirebaseAuthRepository>(
+  getIt.registerLazySingleton<AuthRepository>(
         () => FirebaseAuthRepositoryImpl(getIt<FirebaseAuth>()),
   );
 }

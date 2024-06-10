@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskieapp/di/service_locator.dart';
 import 'package:taskieapp/firebase_options.dart';
 import 'package:taskieapp/presentation/routes/nav_routes.dart';
-import 'package:taskieapp/presentation/view/bem_vindo/welcome_page.dart';
-import 'package:taskieapp/presentation/view/cadastro/cadastro_page.dart';
-import 'package:taskieapp/presentation/view/home/home_page.dart';
-import 'package:taskieapp/presentation/view/login/login_page.dart';
+import 'package:taskieapp/presentation/view/homePage/home_page.dart';
+import 'package:taskieapp/presentation/view/loginPage/login_page.dart';
+import 'package:taskieapp/presentation/view/registerPage/register_page.dart';
+import 'package:taskieapp/presentation/view/welcomePage/welcome_page.dart';
 
 import 'domain/repositories/firebase_auth_repository.dart';
 
@@ -25,16 +25,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<FirebaseAuthRepository>(
-          create: (context) => getIt<FirebaseAuthRepository>(),
+        RepositoryProvider<AuthRepository>(
+          create: (context) => getIt<AuthRepository>(),
         ),
       ],
       child: MaterialApp(
-        initialRoute: NavRoutes.bemVindoPage,
+        initialRoute: NavRoutes.welcomePage,
         routes: {
-          NavRoutes.bemVindoPage: (context) => const WelcomePage(),
+          NavRoutes.welcomePage: (context) => const WelcomePage(),
           NavRoutes.loginPage: (context) => LoginPage(title: 'Login'),
-          NavRoutes.cadastroPage: (context) => CadastroPage(),
+          NavRoutes.registerPage: (context) => RegisterPage(),
           NavRoutes.homePage: (context) => HomePage(),
         },
       ),

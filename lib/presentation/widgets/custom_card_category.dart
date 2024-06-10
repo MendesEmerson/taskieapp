@@ -15,7 +15,7 @@ class CustomCardCategoryWidget extends StatelessWidget {
     final PadraoCategoria padrao = _criarPadraoCategoria(categoryName);
 
     return Card(
-      color: CustomColors.padraoWidgetTransparente,
+      color: CustomColors.transparentWidget,
       child: Container(
         width: MediaQuery.of(context).size.width * 0.35,
         margin: const EdgeInsets.only(left: 12, right: 12),

@@ -1,7 +1,7 @@
-abstract class FirebaseAuthRepository {
+abstract class AuthRepository {
 
-  Future<void> cadastrarUsuario(String nome, String email, String senha);
+  Future<void> registerUser(String nome, String email, String senha);
 
-  Future<void> logarUsuario(String email, String senha);
+  Future<void> loginUser(String email, String senha);
 
 }

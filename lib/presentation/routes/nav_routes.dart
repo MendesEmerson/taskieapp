@@ -1,6 +1,6 @@
 class NavRoutes {
-  static const bemVindoPage = "/";
+  static const welcomePage = "/";
   static const loginPage = "/login";
-  static const cadastroPage = "/cadastro";
+  static const registerPage = "/cadastro";
   static const homePage = "/home";
 }

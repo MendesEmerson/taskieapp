@@ -1,14 +1,14 @@
-class UsuarioModel {
+class UserModel {
 
   final String? id;
   final String email;
-  final String nome;
-  final String senha;
+  final String name;
+  final String password;
 
-  UsuarioModel({
+  UserModel({
     this.id,
-    required this.nome,
+    required this.name,
     required this.email,
-    required this.senha
+    required this.password
   });
 }

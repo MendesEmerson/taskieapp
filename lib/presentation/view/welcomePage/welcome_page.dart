@@ -92,7 +92,7 @@ class WelcomePage extends StatelessWidget {
                   onClick: () {
                     Navigator.pushNamed(
                       context,
-                      NavRoutes.cadastroPage,
+                      NavRoutes.registerPage,
                     );
                   },
                   text: StringsConstants.cadastro,

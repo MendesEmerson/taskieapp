@@ -8,13 +8,13 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final FirebaseAuthRepository firebaseAuthRepository;
+  final AuthRepository firebaseAuthRepository;
 
   LoginBloc({required this.firebaseAuthRepository}) : super(LoginInitial()) {
     on<LoginUsuarioEvent>((event, emit) async {
       emit(LoginLoading());
       try {
-        await firebaseAuthRepository.logarUsuario(event.email, event.senha);
+        await firebaseAuthRepository.loginUser(event.email, event.senha);
         emit(LoginSuccess());
       } catch (e) {
         emit(LoginFailure(error: e.toString()));

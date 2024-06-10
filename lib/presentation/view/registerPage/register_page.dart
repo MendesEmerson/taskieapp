@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:taskieapp/presentation/routes/nav_routes.dart';
-import 'package:taskieapp/presentation/view/cadastro/bloc/cadastro_bloc.dart';
 import 'package:taskieapp/presentation/widgets/custom_button.dart';
 import 'package:taskieapp/presentation/widgets/custom_text.dart';
 import 'package:taskieapp/presentation/widgets/custom_text_input_password.dart';
+
 import '../../../domain/repositories/firebase_auth_repository.dart';
 import '../../comuns/constants/images.dart';
 import '../../comuns/constants/strings.dart';
-import '../../comuns/styles/custom_colors.dart';
 import '../../widgets/custom_text_input.dart';
+import 'bloc/register_bloc.dart';
 
-class CadastroPage extends StatelessWidget {
-  CadastroPage({Key? key});
+class RegisterPage extends StatelessWidget {
+  RegisterPage({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nomeController = TextEditingController();
@@ -28,11 +28,11 @@ class CadastroPage extends StatelessWidget {
       final email = _emailController.text;
       final senha = _senhaController.text;
 
-      context.read<CadastroBloc>().add(
-            CadastrarUsuarioEvent(
-              nome: nome,
+      context.read<RegisterBloc>().add(
+            RegisterUserEvent(
+              name: nome,
               email: email,
-              senha: senha,
+              password: senha,
             ),
           );
     }
@@ -41,14 +41,14 @@ class CadastroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CadastroBloc(
-        firebaseAuthRepository: context.read<FirebaseAuthRepository>(),
+      create: (context) => RegisterBloc(
+        firebaseAuthRepository: context.read<AuthRepository>(),
       ),
-      child: BlocConsumer<CadastroBloc, CadastroState>(
+      child: BlocConsumer<RegisterBloc, RegisterState>(
         listener: (context, state) {
-          if (state is CadastroSuccess) {
+          if (state is RegisterSuccess) {
             Navigator.pushNamed(context, NavRoutes.loginPage);
-          } else if (state is CadastroFailure) {
+          } else if (state is RegisterFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.error)),
             );

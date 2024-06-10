@@ -6,7 +6,6 @@ import 'package:taskieapp/presentation/comuns/constants/strings.dart';
 import 'package:taskieapp/presentation/comuns/styles/custom_colors.dart';
 import 'package:taskieapp/presentation/routes/nav_routes.dart';
 import 'package:taskieapp/presentation/widgets/custom_button.dart';
-import 'package:taskieapp/presentation/widgets/custom_text.dart';
 import 'package:taskieapp/presentation/widgets/custom_text_input_password.dart';
 
 import '../../../domain/repositories/firebase_auth_repository.dart';
@@ -14,7 +13,7 @@ import '../../widgets/custom_text_input.dart';
 import 'bloc/login_bloc.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key, required this.title}) : super(key: key);
+  LoginPage({super.key, required this.title});
 
   final String title;
   final _formKey = GlobalKey<FormState>();
@@ -39,7 +38,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
       create: (context) => LoginBloc(
-        firebaseAuthRepository: context.read<FirebaseAuthRepository>(),
+        firebaseAuthRepository: context.read<AuthRepository>(),
       ),
       child: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {

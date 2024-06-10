@@ -9,7 +9,7 @@ import '../mocks/firebase/firebase_auth_mock.mocks.dart';
 
 void main() {
   late MockFirebaseAuth mockFirebaseAuth;
-  late FirebaseAuthRepository repository;
+  late AuthRepository repository;
 
   setUp(() {
     mockFirebaseAuth = MockFirebaseAuth();
@@ -27,7 +27,7 @@ void main() {
         password: password,
       )).thenAnswer((_) async => MockUserCredential());
 
-      await repository.cadastrarUsuario('Test User', email, password);
+      await repository.registerUser('Test User', email, password);
 
       verify(mockFirebaseAuth.createUserWithEmailAndPassword(
         email: email,
@@ -42,7 +42,7 @@ void main() {
       )).thenThrow(FirebaseAuthException(code: 'email-already-in-use'));
 
       expect(
-            () => repository.cadastrarUsuario('Test User', email, password),
+            () => repository.registerUser('Test User', email, password),
         throwsA(isA<ArgumentError>()),
       );
     });
@@ -53,7 +53,7 @@ void main() {
         password: password,
       )).thenAnswer((_) async => MockUserCredential());
 
-      await repository.logarUsuario(email, password);
+      await repository.loginUser(email, password);
 
       verify(mockFirebaseAuth.signInWithEmailAndPassword(
         email: email,
@@ -68,7 +68,7 @@ void main() {
       )).thenThrow(FirebaseAuthException(code: 'wrong-password'));
 
       expect(
-            () => repository.logarUsuario(email, password),
+            () => repository.loginUser(email, password),
         throwsA(isA<ArgumentError>()),
       );
     });

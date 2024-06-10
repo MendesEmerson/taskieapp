@@ -14,7 +14,7 @@ class CustomProgressTaskBarWidget extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          color: CustomColors.padraoWidgetTransparente),
+          color: CustomColors.transparentWidget),
       padding: const EdgeInsets.all(12),
       width: double.infinity,
       child: Column(
@@ -25,12 +25,12 @@ class CustomProgressTaskBarWidget extends StatelessWidget {
             children: [
               Icon(
                 Icons.menu,
-                color: CustomColors.roxoPadrao,
+                color: CustomColors.defaultPurple,
               ),
               SizedBox(width: 10),
               CustomTextWidget(
                 text: "Todas as tarefas",
-                textColor: CustomColors.roxoPadrao,
+                textColor: CustomColors.defaultPurple,
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
               )
@@ -45,7 +45,7 @@ class CustomProgressTaskBarWidget extends StatelessWidget {
           LinearProgressIndicator(
             value: taskDone / totalTasks,
             valueColor:
-                const AlwaysStoppedAnimation<Color>(CustomColors.roxoPadrao),
+                const AlwaysStoppedAnimation<Color>(CustomColors.defaultPurple),
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             minHeight: 12,
             backgroundColor: CustomColors.textColor,
