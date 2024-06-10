@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           NavRoutes.bemVindoPage: (context) => const WelcomePage(),
           NavRoutes.loginPage: (context) => LoginPage(title: 'Login'),
           NavRoutes.cadastroPage: (context) => CadastroPage(),
-          NavRoutes.homePage: (context) => const HomePage(),
+          NavRoutes.homePage: (context) => HomePage(),
         },
       ),
     );
